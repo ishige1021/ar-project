@@ -8,6 +8,20 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
       body { margin: 0; overflow: hidden; }
+      #capture-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 999;
+        background: #ff6600;
+        color: white;
+        font-size: 20px;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
     </style>
   </head>
   <body>
@@ -17,5 +31,15 @@
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+    <button id="capture-btn">📸 写真を撮る</button>
+    <script>
+      document.getElementById('capture-btn').addEventListener('click', function() {
+        const canvas = document.querySelector('canvas');
+        const link = document.createElement('a');
+        link.download = 'AR_photo.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    </script>
   </body>
 </html>
